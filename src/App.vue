@@ -1,5 +1,5 @@
 <script>
-// import AppHeader from "./components/AppHeader.vue";
+import AppHeader from "./components/AppHeader.vue";
 // import AppMain from "./components/AppMain.vue";
 // import AppFooter from "./components/AppHeader.vue";
 
@@ -14,12 +14,16 @@ export default {
     // ... mymethods
   },
 
-  // components: { AppHeader, AppMain, AppFooter },
+  components: {
+    AppHeader,
+    // AppMain,
+    // AppFooter
+  },
 };
 </script>
 
 <template>
-  <!-- <app-header /> -->
+  <app-header />
   <!-- <app-main /> -->
   <!-- <app-footer /> -->
 </template>
