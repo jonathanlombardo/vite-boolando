@@ -10,25 +10,27 @@ export default {
       sections,
 
       activeCatIndex: 0,
+      activeSecIndex: 0,
     };
   },
+
   computed: {
-    activeCat() {
-      return categories[this.activeCatIndex];
-    },
+    // activeCat() {
+    //   return categories[this.activeCatIndex];
+    // },
   },
 
   methods: {
     catClickHandler(index) {
-      this.activeCat.active = false;
-      //   console.log(this.activeCat);
-
+      this.categories[this.activeCatIndex].active = false;
       this.activeCatIndex = index;
+      this.categories[this.activeCatIndex].active = true;
+    },
 
-      this.activeCat.active = true;
-      //   console.log(this.activeCat);
-
-      //   console.log(this.activeCatIndex);
+    secClickHandler(index) {
+      this.sections[this.activeSecIndex].active = false;
+      this.activeSecIndex = index;
+      this.sections[this.activeSecIndex].active = true;
     },
   },
 
@@ -44,15 +46,12 @@ export default {
           {{ cat.name }}
         </li>
       </ul>
-      <!-- <a href="#">
-        <img src="/boolean-logo.png" alt="" />
-      </a> -->
 
       <boolean-logo class="logo" />
 
       <ul>
-        <li v-for="sec in sections">
-          <i :class="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]"></i>
+        <li v-for="(sec, index) in sections">
+          <i :class="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]" @click="secClickHandler(index)"></i>
         </li>
       </ul>
     </div>
