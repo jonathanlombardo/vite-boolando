@@ -1,4 +1,5 @@
 <script>
+import BooleanLogo from "./BooleanLogo.vue";
 import sections from "../assets/js/_sectionData.js";
 import categories from "../assets/js/_catData.js";
 
@@ -30,6 +31,8 @@ export default {
       //   console.log(this.activeCatIndex);
     },
   },
+
+  components: { BooleanLogo },
 };
 </script>
 
@@ -41,9 +44,12 @@ export default {
           {{ cat.name }}
         </li>
       </ul>
-      <a href="#">
+      <!-- <a href="#">
         <img src="/boolean-logo.png" alt="" />
-      </a>
+      </a> -->
+
+      <boolean-logo class="logo" />
+
       <ul>
         <li v-for="sec in sections">
           <i :class="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]"></i>
@@ -63,9 +69,13 @@ header {
   font-size: 1.2rem;
   color: white;
   height: $header-height;
+
+  position: sticky;
+  top: 0;
 }
 .container {
   @include space-between();
+  align-items: center;
   height: 100%;
 
   ul {
@@ -82,14 +92,9 @@ header {
       }
     }
   }
-
-  a {
-    line-height: $header-height;
-  }
 }
 
-img {
-  max-height: 50%;
-  vertical-align: middle;
+.logo {
+  height: 50%;
 }
 </style>
