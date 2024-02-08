@@ -9,8 +9,9 @@ export default {
   },
 
   methods: {
-    getUrlImg() {
-      // metodo per ottenere url img
+    getUrlImg(img) {
+      const imgUrl = new URL("../assets/img/" + img, import.meta.url);
+      return imgUrl.href;
     },
   },
 
@@ -22,8 +23,8 @@ export default {
   <main>
     <div class="container">
       <div class="row">
-        <div v-for="prod in products" class="col">
-          <ProductCard :title="prod.title" :frontImg="getUrlImg()" />
+        <div v-for="(prod, index) in products" class="col">
+          <ProductCard :title="prod.title" :frontImg="getUrlImg(`${index + 1}.webp`)" :backImg="getUrlImg(`${index + 1}b.webp`)" :brand="prod.brand" :oldPrice="prod.originalPrice" :finalPrice="prod.finalPrice" :tag="prod.tag" />
         </div>
       </div>
     </div>
@@ -33,6 +34,6 @@ export default {
 <style lang="scss" scoped>
 .col {
   width: calc(100% / 3);
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 </style>

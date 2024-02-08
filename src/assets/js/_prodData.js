@@ -7,6 +7,7 @@ const products = [
     originalPrice: 29.99,
     finalPrice: 14.99,
     tag: "Sostenibilità",
+    onWish: false,
   },
 
   {
@@ -15,6 +16,7 @@ const products = [
     originalPrice: 29.99,
     finalPrice: 20.99,
     tag: null,
+    onWish: false,
   },
 
   {
@@ -23,6 +25,7 @@ const products = [
     originalPrice: 184.99,
     finalPrice: 129.99,
     tag: null,
+    onWish: false,
   },
 
   {
@@ -31,6 +34,7 @@ const products = [
     originalPrice: 29.99,
     finalPrice: 14.99,
     tag: "Sostenibilità",
+    onWish: false,
   },
 
   {
@@ -39,6 +43,7 @@ const products = [
     originalPrice: 29.99,
     finalPrice: 29.99,
     tag: null,
+    onWish: false,
   },
 
   {
@@ -47,5 +52,6 @@ const products = [
     originalPrice: 29.99,
     finalPrice: 29.99,
     tag: "Sostenibilità",
+    onWish: false,
   },
 ];

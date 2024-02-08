@@ -68,9 +68,11 @@ header {
   font-size: 1.2rem;
   color: white;
   height: $header-height;
+  margin-bottom: $space-m;
 
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 .container {
   @include space-between();
