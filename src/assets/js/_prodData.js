@@ -8,6 +8,7 @@ const products = [
     finalPrice: 14.99,
     tag: "Sostenibilità",
     onWish: false,
+    genre: "man",
   },
 
   {
@@ -17,6 +18,7 @@ const products = [
     finalPrice: 20.99,
     tag: null,
     onWish: false,
+    genre: "woman",
   },
 
   {
@@ -26,6 +28,7 @@ const products = [
     finalPrice: 129.99,
     tag: null,
     onWish: false,
+    genre: "woman",
   },
 
   {
@@ -35,6 +38,7 @@ const products = [
     finalPrice: 14.99,
     tag: "Sostenibilità",
     onWish: false,
+    genre: "man",
   },
 
   {
@@ -44,6 +48,7 @@ const products = [
     finalPrice: 29.99,
     tag: null,
     onWish: false,
+    genre: "woman",
   },
 
   {
@@ -53,5 +58,6 @@ const products = [
     finalPrice: 29.99,
     tag: "Sostenibilità",
     onWish: false,
+    genre: "woman",
   },
 ];

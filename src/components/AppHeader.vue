@@ -2,12 +2,14 @@
 import BooleanLogo from "./BooleanLogo.vue";
 import sections from "../assets/js/_sectionData.js";
 import categories from "../assets/js/_catData.js";
+import products from "../assets/js/_prodData.js";
 
 export default {
   data() {
     return {
       categories,
       sections,
+      products,
 
       activeCatIndex: 0,
       activeSecIndex: 0,
@@ -21,7 +23,8 @@ export default {
   },
 
   methods: {
-    catClickHandler(index) {
+    catClickHandler(cat, index) {
+      if (cat.isEmpty) return;
       this.categories[this.activeCatIndex].active = false;
       this.activeCatIndex = index;
       this.categories[this.activeCatIndex].active = true;
@@ -33,6 +36,19 @@ export default {
       this.sections[this.activeSecIndex].active = true;
     },
   },
+  created() {
+    const man = this.products.filter((prod) => prod.genre == "man");
+    const woman = this.products.filter((prod) => prod.genre == "woman");
+    const kids = this.products.filter((prod) => prod.genre == "kids");
+
+    console.log(kids);
+
+    for (let cat of this.categories) {
+      if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
+      if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
+      if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
+    }
+  },
 
   components: { BooleanLogo },
 };
@@ -42,7 +58,7 @@ export default {
   <header>
     <div class="container">
       <ul>
-        <li v-for="(cat, index) in categories" :class="cat.active ? 'active' : ''" @click="catClickHandler(index)">
+        <li v-for="(cat, index) in categories" :class="{ active: cat.active, disable: cat.isEmpty }" @click="catClickHandler(cat, index)">
           {{ cat.name }}
         </li>
       </ul>
@@ -90,6 +106,11 @@ header {
 
       &.active {
         border-bottom: 5px solid white;
+      }
+
+      &.disable {
+        cursor: auto;
+        opacity: 0.5;
       }
     }
   }
