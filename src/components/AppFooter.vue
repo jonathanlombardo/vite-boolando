@@ -1,12 +1,8 @@
 <script>
-import { company, aboutLinks } from "../assets/js/_aboutData.js";
-
 export default {
-  data() {
-    return {
-      company,
-      aboutLinks,
-    };
+  props: {
+    company: Object,
+    aboutLinks: Array,
   },
 };
 </script>

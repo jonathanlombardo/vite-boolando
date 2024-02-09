@@ -1,9 +1,16 @@
 <script>
-export default {};
+export default {
+  props: {
+    href: {
+      type: String,
+      default: "#",
+    },
+  },
+};
 </script>
 
 <template>
-  <a href="#">
+  <a :href="href">
     <img src="/boolean-logo.png" alt="" />
   </a>
 </template>

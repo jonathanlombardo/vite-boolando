@@ -1,11 +1,8 @@
 <script>
-import products from "../assets/js/_prodData.js";
 import ProductCard from "./ProductCard.vue";
 export default {
-  data() {
-    return {
-      products,
-    };
+  props: {
+    products: Array,
   },
 
   methods: {
@@ -24,7 +21,7 @@ export default {
     <div class="container">
       <div class="row">
         <div v-for="(prod, index) in products" class="col">
-          <ProductCard :title="prod.title" :frontImg="getUrlImg(`${index + 1}.webp`)" :backImg="getUrlImg(`${index + 1}b.webp`)" :brand="prod.brand" :oldPrice="prod.originalPrice" :finalPrice="prod.finalPrice" :tag="prod.tag" />
+          <product-card :title="prod.title" :frontImg="getUrlImg(`${index + 1}.webp`)" :backImg="getUrlImg(`${index + 1}b.webp`)" :brand="prod.brand" :oldPrice="prod.originalPrice" :finalPrice="prod.finalPrice" :tag="prod.tag" />
         </div>
       </div>
     </div>

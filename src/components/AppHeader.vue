@@ -1,16 +1,15 @@
 <script>
 import BooleanLogo from "./BooleanLogo.vue";
-import sections from "../assets/js/_sectionData.js";
-import categories from "../assets/js/_catData.js";
-import products from "../assets/js/_prodData.js";
 
 export default {
+  props: {
+    categories: Array,
+    sections: Array,
+    products: Array,
+  },
+
   data() {
     return {
-      categories,
-      sections,
-      products,
-
       activeCatIndex: 0,
       activeSecIndex: 0,
     };
@@ -44,8 +43,6 @@ export default {
     const man = this.products.filter((prod) => prod.genre == "man");
     const woman = this.products.filter((prod) => prod.genre == "woman");
     const kids = this.products.filter((prod) => prod.genre == "kids");
-
-    console.log(kids);
 
     for (let cat of this.categories) {
       if (!man.length && cat.name == "Uomo") cat.isEmpty = true;

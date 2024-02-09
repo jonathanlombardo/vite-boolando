@@ -3,15 +3,20 @@ import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
 
+import sections from "./assets/js/_sectionData.js";
+import categories from "./assets/js/_catData.js";
+import products from "./assets/js/_prodData.js";
+import { company, aboutLinks } from "./assets/js/_aboutData.js";
+
 export default {
   data() {
     return {
-      // ... mydata
+      categories,
+      sections,
+      products,
+      company,
+      aboutLinks,
     };
-  },
-
-  methods: {
-    // ... mymethods
   },
 
   components: {
@@ -23,9 +28,9 @@ export default {
 </script>
 
 <template>
-  <app-header />
-  <app-main />
-  <app-footer />
+  <app-header :categories="categories" :sections="sections" :products="products" />
+  <app-main :products="products" />
+  <app-footer :company="company" :aboutLinks="aboutLinks" />
 </template>
 
 <style lang="scss">
