@@ -68,7 +68,7 @@ export default {
 
       <ul>
         <li v-for="(sec, index) in sections">
-          <i :class="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]" @click="secClickHandler(index)"></i>
+          <font-awesome-icon :icon="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]" @click="secClickHandler(index)" />
         </li>
       </ul>
     </div>

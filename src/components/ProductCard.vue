@@ -20,12 +20,6 @@ export default {
       return this.getDiscount == 0;
     },
   },
-
-  methods: {
-    // getDiscount() {
-    //   return ((1 - this.finalPrice / this.oldPrice) * 100).toFixed(0);
-    // },
-  },
 };
 </script>
 
@@ -40,7 +34,7 @@ export default {
     <div class="price">€ {{ finalPrice.toFixed(2) }}</div>
     <div v-if="!noDiscount" class="old-price">€ {{ oldPrice.toFixed(2) }}</div>
     <div class="wish-wrapper" @click="onWish = !onWish">
-      <i class="fa-heart" :class="onWish ? 'fa-solid' : 'fa-regular'"></i>
+      <font-awesome-icon :icon="[onWish ? 'fas' : 'far', 'heart']" />
     </div>
     <div class="tag-wrapper">
       <div v-if="!noDiscount" class="discount">{{ getDiscount }}%</div>

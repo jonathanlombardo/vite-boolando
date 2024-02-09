@@ -4,18 +4,18 @@ const sections = [
   {
     name: "My Account",
     active: false,
-    class: "fa-user",
+    class: "user",
   },
 
   {
     name: "Wish List",
     active: false,
-    class: "fa-heart",
+    class: "heart",
   },
 
   {
     name: "Cart",
     active: false,
-    class: "fa-square",
+    class: "square",
   },
 ];

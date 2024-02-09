@@ -23,7 +23,7 @@ export default {
       <div class="social-wrapper">
         <p>Trovaci anche su:</p>
         <a v-for="social in company.social" :href="social.link">
-          <i :class="social.iconClass"></i>
+          <font-awesome-icon class="icon" :icon="['fab', social.iconClass]" />
         </a>
       </div>
     </div>
@@ -41,10 +41,10 @@ footer {
     text-decoration: none;
     color: inherit;
 
-    i {
+    .icon {
       display: inline-block;
       margin: 5px 5px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
   }
   .container {

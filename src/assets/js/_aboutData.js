@@ -5,35 +5,35 @@ const company = {
   social: [
     {
       name: "Twitter",
-      iconClass: "fa-brands fa-square-twitter",
+      iconClass: "square-twitter",
       link: "#",
       nickname: "@Boolean",
     },
 
     {
       name: "Facebook",
-      iconClass: "fa-brands fa-square-facebook",
+      iconClass: "square-facebook",
       link: "#",
       nickname: "@Boolean",
     },
 
     {
       name: "Instagram",
-      iconClass: "fa-brands fa-square-instagram",
+      iconClass: "square-instagram",
       link: "#",
       nickname: "@Boolean",
     },
 
     {
       name: "Pinterest",
-      iconClass: "fa-brands fa-square-pinterest",
+      iconClass: "square-pinterest",
       link: "#",
       nickname: "@Boolean",
     },
 
     {
       name: "YouTube",
-      iconClass: "fa-brands fa-square-youtube",
+      iconClass: "square-youtube",
       link: "#",
       nickname: "@Boolean",
     },
