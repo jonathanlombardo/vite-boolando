@@ -17,23 +17,27 @@ export default {
   },
 
   computed: {
-    // activeCat() {
-    //   return categories[this.activeCatIndex];
-    // },
+    activeCat() {
+      return this.categories[this.activeCatIndex];
+    },
+
+    activeSec() {
+      return this.sections[this.activeSecIndex];
+    },
   },
 
   methods: {
     catClickHandler(cat, index) {
       if (cat.isEmpty) return;
-      this.categories[this.activeCatIndex].active = false;
+      this.activeCat.active = false;
       this.activeCatIndex = index;
-      this.categories[this.activeCatIndex].active = true;
+      this.activeCat.active = true;
     },
 
     secClickHandler(index) {
-      this.sections[this.activeSecIndex].active = false;
+      this.activeSec.active = false;
       this.activeSecIndex = index;
-      this.sections[this.activeSecIndex].active = true;
+      this.activeSec.active = true;
     },
   },
   created() {
