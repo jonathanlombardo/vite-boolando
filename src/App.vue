@@ -1,7 +1,7 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
-// import AppFooter from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 export default {
   data() {
@@ -17,7 +17,7 @@ export default {
   components: {
     AppHeader,
     AppMain,
-    // AppFooter
+    AppFooter,
   },
 };
 </script>
@@ -25,7 +25,7 @@ export default {
 <template>
   <app-header />
   <app-main />
-  <!-- <app-footer /> -->
+  <app-footer />
 </template>
 
 <style lang="scss">
