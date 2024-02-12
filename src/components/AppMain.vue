@@ -1,18 +1,29 @@
 <script>
 import ProductCard from "./ProductCard.vue";
+
+import axios from "axios";
+import { store, apiURI } from "../store.js";
+
 export default {
-  props: {
-    products: Array,
+  data() {
+    return {
+      store,
+    };
   },
 
   methods: {
-    getUrlImg(img) {
-      const imgUrl = new URL("../assets/img/" + img, import.meta.url);
-      return imgUrl.href;
+    toggleOnWish(prod) {
+      prod.onWish = !prod.onWish;
     },
   },
 
   components: { ProductCard },
+
+  created() {
+    axios.get(`${apiURI}/products`).then((response) => {
+      store.products = response.data;
+    });
+  },
 };
 </script>
 
@@ -20,10 +31,19 @@ export default {
   <main>
     <div class="container">
       <div class="row">
-        <div v-for="(prod, index) in products" class="col">
-          <product-card :title="prod.title" :frontImg="getUrlImg(`${index + 1}.webp`)" :backImg="getUrlImg(`${index + 1}b.webp`)" :brand="prod.brand" :oldPrice="prod.originalPrice" :finalPrice="prod.finalPrice" :tag="prod.tag" />
+        <div v-for="prod in store.products" class="col">
+          <product-card :prod="prod" @heart-click="toggleOnWish(prod)" />
         </div>
       </div>
+
+      <!-- ********** -->
+      <!-- <h1>Favourite</h1>
+      <div class="row">
+        <div v-for="prod in store.products" v-show="prod.onWish" class="col">
+          <product-card :prod="prod" />
+        </div>
+      </div> -->
+      <!-- ********** -->
     </div>
   </main>
 </template>

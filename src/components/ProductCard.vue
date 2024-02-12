@@ -1,23 +1,27 @@
 <script>
 export default {
   props: {
-    frontImg: String,
-    backImg: String,
-    brand: String,
-    title: String,
-    oldPrice: Number,
-    finalPrice: Number,
-    tag: String,
-    onWish: Boolean,
+    prod: Object,
   },
 
   computed: {
     getDiscount() {
-      return ((1 - this.finalPrice / this.oldPrice) * 100).toFixed(0);
+      return ((1 - this.prod.finalPrice / this.prod.originalPrice) * 100).toFixed(0);
     },
 
     noDiscount() {
       return this.getDiscount == 0;
+    },
+  },
+
+  methods: {
+    getUrlImg(img) {
+      const imgUrl = new URL("../assets/img/" + img, import.meta.url);
+      return imgUrl.href;
+    },
+
+    submit() {
+      this.$emit("heartClick");
     },
   },
 };
@@ -26,19 +30,19 @@ export default {
 <template>
   <div class="card">
     <div class="card-image">
-      <img :src="frontImg" :alt="title" />
-      <img class="back-img" :src="backImg" :alt="title + ' secondary'" />
+      <img :src="getUrlImg(prod.frontImg)" :alt="prod.title" />
+      <img class="back-img" :src="getUrlImg(prod.backImg)" :alt="prod.title + ' secondary'" />
     </div>
-    <div class="brand mt mb">{{ brand }}</div>
-    <div class="title mb">{{ title }}</div>
-    <div class="price">€ {{ finalPrice.toFixed(2) }}</div>
-    <div v-if="!noDiscount" class="old-price">€ {{ oldPrice.toFixed(2) }}</div>
-    <div class="wish-wrapper" @click="onWish = !onWish">
-      <font-awesome-icon :icon="[onWish ? 'fas' : 'far', 'heart']" />
+    <div class="brand mt mb">{{ prod.brand }}</div>
+    <div class="title mb">{{ prod.title }}</div>
+    <div class="price">€ {{ prod.finalPrice.toFixed(2) }}</div>
+    <div v-if="!noDiscount" class="old-price">€ {{ prod.originalPrice.toFixed(2) }}</div>
+    <div class="wish-wrapper" @click="submit()">
+      <font-awesome-icon :icon="[prod.onWish ? 'fas' : 'far', 'heart']" />
     </div>
     <div class="tag-wrapper">
       <div v-if="!noDiscount" class="discount">{{ getDiscount }}%</div>
-      <div v-if="tag" class="tag">{{ tag }}</div>
+      <div v-if="prod.tag" class="tag">{{ prod.tag }}</div>
     </div>
   </div>
 </template>

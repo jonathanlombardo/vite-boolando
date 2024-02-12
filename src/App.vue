@@ -28,8 +28,8 @@ export default {
 </script>
 
 <template>
-  <app-header :categories="categories" :sections="sections" :products="products" />
-  <app-main :products="products" />
+  <app-header />
+  <app-main />
   <app-footer :company="company" :aboutLinks="aboutLinks" />
 </template>
 

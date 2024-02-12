@@ -1,15 +1,12 @@
 <script>
 import BooleanLogo from "./BooleanLogo.vue";
+import axios from "axios";
+import { store, apiURI } from "../store.js";
 
 export default {
-  props: {
-    categories: Array,
-    sections: Array,
-    products: Array,
-  },
-
   data() {
     return {
+      store,
       activeCatIndex: 0,
       activeSecIndex: 0,
     };
@@ -17,11 +14,11 @@ export default {
 
   computed: {
     activeCat() {
-      return this.categories[this.activeCatIndex];
+      return store.categories[this.activeCatIndex];
     },
 
     activeSec() {
-      return this.sections[this.activeSecIndex];
+      return store.sections[this.activeSecIndex];
     },
   },
 
@@ -40,15 +37,39 @@ export default {
     },
   },
   created() {
-    const man = this.products.filter((prod) => prod.genre == "man");
-    const woman = this.products.filter((prod) => prod.genre == "woman");
-    const kids = this.products.filter((prod) => prod.genre == "kids");
+    const uris = [
+      {
+        uri: `${apiURI}/products`,
+        objToFillKey: "products",
+      },
+      {
+        uri: `${apiURI}/categories`,
+        objToFillKey: "categories",
+      },
+      {
+        uri: `${apiURI}/sections`,
+        objToFillKey: "sections",
+      },
+    ];
 
-    for (let cat of this.categories) {
-      if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
-      if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
-      if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
-    }
+    const requests = uris.map((uri) => axios.get(uri.uri));
+
+    axios.all(requests).then((responses) => {
+      responses.forEach((resp, index) => {
+        const objToFill = uris[index].objToFillKey;
+        store[objToFill] = resp.data;
+      });
+
+      const man = store.products.filter((prod) => prod.genre == "man");
+      const woman = store.products.filter((prod) => prod.genre == "woman");
+      const kids = store.products.filter((prod) => prod.genre == "kids");
+
+      for (let cat of store.categories) {
+        if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
+        if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
+        if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
+      }
+    });
   },
 
   components: { BooleanLogo },
@@ -59,7 +80,7 @@ export default {
   <header>
     <div class="container">
       <ul>
-        <li v-for="(cat, index) in categories" :class="{ active: cat.active, disable: cat.isEmpty }" @click="catClickHandler(cat, index)">
+        <li v-for="(cat, index) in store.categories" :class="{ active: cat.active, disable: cat.isEmpty }" @click="catClickHandler(cat, index)">
           {{ cat.name }}
         </li>
       </ul>
@@ -67,7 +88,7 @@ export default {
       <boolean-logo class="logo" />
 
       <ul>
-        <li v-for="(sec, index) in sections">
+        <li v-for="(sec, index) in store.sections">
           <font-awesome-icon :icon="[sec.active ? 'fa-solid' : 'fa-regular', sec.class]" @click="secClickHandler(index)" />
         </li>
       </ul>
