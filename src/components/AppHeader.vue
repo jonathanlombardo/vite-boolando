@@ -1,7 +1,6 @@
 <script>
 import BooleanLogo from "./BooleanLogo.vue";
-import axios from "axios";
-import { store, apiURI } from "../store.js";
+import { store } from "../store.js";
 
 export default {
   data() {
@@ -35,41 +34,6 @@ export default {
       this.activeSecIndex = index;
       this.activeSec.active = true;
     },
-  },
-  created() {
-    const uris = [
-      {
-        uri: `${apiURI}/products`,
-        objToFillKey: "products",
-      },
-      {
-        uri: `${apiURI}/categories`,
-        objToFillKey: "categories",
-      },
-      {
-        uri: `${apiURI}/sections`,
-        objToFillKey: "sections",
-      },
-    ];
-
-    const requests = uris.map((uri) => axios.get(uri.uri));
-
-    axios.all(requests).then((responses) => {
-      responses.forEach((resp, index) => {
-        const objToFill = uris[index].objToFillKey;
-        store[objToFill] = resp.data;
-      });
-
-      const man = store.products.filter((prod) => prod.genre == "man");
-      const woman = store.products.filter((prod) => prod.genre == "woman");
-      const kids = store.products.filter((prod) => prod.genre == "kids");
-
-      for (let cat of store.categories) {
-        if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
-        if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
-        if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
-      }
-    });
   },
 
   components: { BooleanLogo },

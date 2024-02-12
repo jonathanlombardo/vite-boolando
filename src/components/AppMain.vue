@@ -1,8 +1,7 @@
 <script>
 import ProductCard from "./ProductCard.vue";
 
-import axios from "axios";
-import { store, apiURI } from "../store.js";
+import { store } from "../store.js";
 
 export default {
   data() {
@@ -18,12 +17,6 @@ export default {
   },
 
   components: { ProductCard },
-
-  created() {
-    axios.get(`${apiURI}/products`).then((response) => {
-      store.products = response.data;
-    });
-  },
 };
 </script>
 

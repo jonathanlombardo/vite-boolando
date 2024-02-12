@@ -3,19 +3,13 @@ import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
 
-import sections from "./assets/js/_sectionData.js";
-import categories from "./assets/js/_catData.js";
-import products from "./assets/js/_prodData.js";
-import { company, aboutLinks } from "./assets/js/_aboutData.js";
+import axios from "axios";
+import { store, apiURI } from "./store.js";
 
 export default {
   data() {
     return {
-      categories,
-      sections,
-      products,
-      company,
-      aboutLinks,
+      store,
     };
   },
 
@@ -24,13 +18,57 @@ export default {
     AppMain,
     AppFooter,
   },
+
+  created() {
+    const uris = [
+      {
+        uri: `${apiURI}/products`,
+        objToFillKey: "products",
+      },
+      {
+        uri: `${apiURI}/categories`,
+        objToFillKey: "categories",
+      },
+      {
+        uri: `${apiURI}/sections`,
+        objToFillKey: "sections",
+      },
+      {
+        uri: `${apiURI}/company`,
+        objToFillKey: "company",
+      },
+      {
+        uri: `${apiURI}/aboutLinks`,
+        objToFillKey: "aboutLinks",
+      },
+    ];
+
+    const requests = uris.map((uri) => axios.get(uri.uri));
+
+    axios.all(requests).then((responses) => {
+      responses.forEach((resp, index) => {
+        const objToFill = uris[index].objToFillKey;
+        store[objToFill] = resp.data;
+      });
+
+      const man = store.products.filter((prod) => prod.genre == "man");
+      const woman = store.products.filter((prod) => prod.genre == "woman");
+      const kids = store.products.filter((prod) => prod.genre == "kids");
+
+      for (let cat of store.categories) {
+        if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
+        if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
+        if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
+      }
+    });
+  },
 };
 </script>
 
 <template>
   <app-header />
   <app-main />
-  <app-footer :company="company" :aboutLinks="aboutLinks" />
+  <app-footer />
 </template>
 
 <style lang="scss">

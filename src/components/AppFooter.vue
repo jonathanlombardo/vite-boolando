@@ -1,8 +1,11 @@
 <script>
+import { store } from "../store.js";
+
 export default {
-  props: {
-    company: Object,
-    aboutLinks: Array,
+  data() {
+    return {
+      store,
+    };
   },
 };
 </script>
@@ -11,9 +14,9 @@ export default {
   <footer>
     <div class="container">
       <div class="info-wrapper">
-        <div class="company">{{ company.name }}</div>
+        <div class="company">{{ store.company.name }}</div>
         <ul>
-          <li v-for="link in aboutLinks">
+          <li v-for="link in store.aboutLinks">
             <a :href="link.link">
               {{ link.name }}
             </a>
@@ -22,7 +25,7 @@ export default {
       </div>
       <div class="social-wrapper">
         <p>Trovaci anche su:</p>
-        <a v-for="social in company.social" :href="social.link">
+        <a v-for="social in store.company.social" :href="social.link">
           <font-awesome-icon class="icon" :icon="['fab', social.iconClass]" />
         </a>
       </div>
