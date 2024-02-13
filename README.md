@@ -63,4 +63,15 @@ Aggiungere al global state anche la lista di prodotti recuperata dal JSON Server
 
 <hr>
 
-> to be continued...
+##### Milestone 4
+
+- Facciamo in modo che al click sul nome del prodotto nella card venga emesso un evento "show-product" verso il componente App.
+- In App, quando riceviamo l'evento, apriamo una modale che mostra tutte le informazioni testuali del prodotto.
+  - Nella modale è presente una X (o un pulsante) per chiuderla.
+  <hr>
+
+##### Bonus
+
+Proviamo a creare una modale più completa: mostriamo le immagini del prodotto sulla sinistra e le informazioni di testo sulla destra.
+
+<hr>
