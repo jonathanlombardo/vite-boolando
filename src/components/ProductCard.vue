@@ -14,6 +14,8 @@ export default {
     },
   },
 
+  emits: ["heart-click"],
+
   methods: {
     getUrlImg(img) {
       const imgUrl = new URL("../assets/img/" + img, import.meta.url);

@@ -17,6 +17,11 @@ export const store = reactive({
     message: "",
     class: "",
   },
+
+  modal: {
+    product: {},
+    show: false,
+  },
 });
 
 export const apiURI = "http://localhost:3000";

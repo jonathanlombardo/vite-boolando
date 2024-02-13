@@ -3,6 +3,7 @@ import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
 import AppAlert from "./components/AppAlert.vue";
+import AppModal from "./components/AppModal.vue";
 
 import axios from "axios";
 import { store, apiURI } from "./store.js";
@@ -19,6 +20,14 @@ export default {
     AppMain,
     AppFooter,
     AppAlert,
+    AppModal,
+  },
+
+  methods: {
+    handleShowDetails(prod) {
+      store.modal.product = prod;
+      store.modal.show = true;
+    },
   },
 
   created() {
@@ -78,9 +87,10 @@ export default {
 
 <template>
   <app-loader v-if="store.loader.show" />
+  <app-modal v-if="store.modal.show" />
   <app-header />
   <app-alert v-if="store.alert.show" />
-  <app-main />
+  <app-main @show-details="handleShowDetails" />
   <app-footer />
 </template>
 

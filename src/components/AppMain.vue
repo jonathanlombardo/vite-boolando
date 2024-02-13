@@ -10,9 +10,15 @@ export default {
     };
   },
 
+  emits: ["show-details"],
+
   methods: {
     toggleOnWish(prod) {
       prod.onWish = !prod.onWish;
+    },
+
+    showDetails(prod) {
+      this.$emit("show-details", prod);
     },
   },
 
@@ -25,7 +31,7 @@ export default {
     <div class="container">
       <div class="row">
         <div v-for="prod in store.products" class="col">
-          <product-card :prod="prod" @heart-click="toggleOnWish(prod)" />
+          <product-card :prod="prod" @heart-click="toggleOnWish(prod)" @click="showDetails(prod)" />
         </div>
       </div>
 
@@ -44,6 +50,6 @@ export default {
 <style lang="scss" scoped>
 .col {
   width: calc(100% / 3);
-  // border: 1px solid black;
+  cursor: pointer;
 }
 </style>
