@@ -2,6 +2,7 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppFooter from "./components/AppFooter.vue";
+import AppAlert from "./components/AppAlert.vue";
 
 import axios from "axios";
 import { store, apiURI } from "./store.js";
@@ -17,6 +18,7 @@ export default {
     AppHeader,
     AppMain,
     AppFooter,
+    AppAlert,
   },
 
   created() {
@@ -45,28 +47,39 @@ export default {
 
     const requests = uris.map((uri) => axios.get(uri.uri));
 
-    axios.all(requests).then((responses) => {
-      responses.forEach((resp, index) => {
-        const objToFill = uris[index].objToFillKey;
-        store[objToFill] = resp.data;
-      });
+    store.loader.show = true;
+    axios
+      .all(requests)
+      .then((responses) => {
+        responses.forEach((resp, index) => {
+          const objToFill = uris[index].objToFillKey;
+          store[objToFill] = resp.data;
+        });
 
-      const man = store.products.filter((prod) => prod.genre == "man");
-      const woman = store.products.filter((prod) => prod.genre == "woman");
-      const kids = store.products.filter((prod) => prod.genre == "kids");
+        const man = store.products.filter((prod) => prod.genre == "man");
+        const woman = store.products.filter((prod) => prod.genre == "woman");
+        const kids = store.products.filter((prod) => prod.genre == "kids");
 
-      for (let cat of store.categories) {
-        if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
-        if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
-        if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
-      }
-    });
+        for (let cat of store.categories) {
+          if (!man.length && cat.name == "Uomo") cat.isEmpty = true;
+          if (!woman.length && cat.name == "Donna") cat.isEmpty = true;
+          if (!kids.length && cat.name == "Bambino") cat.isEmpty = true;
+        }
+      })
+      .catch((err) => {
+        store.alert.message = err.message;
+        store.alert.class = "danger";
+        store.alert.show = true;
+      })
+      .finally(() => (store.loader.show = false));
   },
 };
 </script>
 
 <template>
+  <app-loader v-if="store.loader.show" />
   <app-header />
+  <app-alert v-if="store.alert.show" />
   <app-main />
   <app-footer />
 </template>

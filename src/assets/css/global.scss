@@ -17,3 +17,8 @@
     }
   }
 }
+
+.layover {
+  @include layer();
+  z-index: 2;
+}
