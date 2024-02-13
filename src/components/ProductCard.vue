@@ -14,7 +14,7 @@ export default {
     },
   },
 
-  emits: ["heart-click"],
+  emits: ["heartClick", "open-details"],
 
   methods: {
     getUrlImg(img) {
@@ -36,7 +36,7 @@ export default {
       <img class="back-img" :src="getUrlImg(prod.backImg)" :alt="prod.title + ' secondary'" />
     </div>
     <div class="brand mt mb">{{ prod.brand }}</div>
-    <div class="title mb">{{ prod.title }}</div>
+    <div class="title mb" @click="$emit('open-details', prod)">{{ prod.title }}</div>
     <div class="price">€ {{ prod.finalPrice.toFixed(2) }}</div>
     <div v-if="!noDiscount" class="old-price">€ {{ prod.originalPrice.toFixed(2) }}</div>
     <div class="wish-wrapper" @click="submit()">
@@ -76,6 +76,7 @@ img {
 
 .title {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .price,

@@ -25,6 +25,8 @@ export default {
 
   methods: {
     handleShowDetails(prod) {
+      // console.log(ev.target);
+      // if (ev.target.classList.contains("wish")) return;
       store.modal.product = prod;
       store.modal.show = true;
     },
